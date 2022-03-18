@@ -1,0 +1,13 @@
+get http://localhost:7777/
+
+###
+get http://localhost:7777/dataset/asdfasdf
+
+###
+put http://localhost:7777/dataset/create/aghanistan/18091/0
+
+###
+get http://localhost:7777/dataset/all
+
+###
+delete http://localhost:7777/dataset/delete/aghanistan
