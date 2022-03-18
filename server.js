@@ -30,11 +30,15 @@ async function startServer(){
         /** 
          * import our default controller
          * and setup corresponding route handlers
+         * 
+         * note: PUT is used for the `create_route` to mitigate cases where duplicate records may be created from sending multiple create requests
          */
         const default_controller = require("./controllers/default");
         app.get("/", default_controller.default_route);
         app.get("/dataset/all", default_controller.read_all_route);
-        app.put("/dataset/create/:name/:male/:female", default_controller.create_route); //we use PUT for idempotency, to mitigate duplicate records of the same data being created
+        app.get("/dataset/read/:name", default_controller.read_route);
+        app.put("/dataset/create/:name/:male/:female", default_controller.create_route);
+        app.put("/dataset/update/:name/:property_to_update/:updated_value", default_controller.update_route);
         app.delete("/dataset/delete/:name", default_controller.delete_route);
 
         /** begin express server listening on port 7777 */
