@@ -4,7 +4,7 @@
   "description": "- pull/clone the repository\r - run your localhost mongodb server : default url is localhost:27017\r - run `node server.js` on the project directory\r - in vscode, install the extension `REST Client by Huachao Mao`\r - open the file `rest_tester.rest` in vscode\r - click on `send request` to test the API",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test",
     "start": "node server.js"
   },
   "repository": {
@@ -21,6 +21,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "mocha": "^9.2.2",
-    "mongodb": "^4.4.1"
+    "mongodb": "^4.4.1",
+    "request": "^2.88.2",
+    "validator": "^13.7.0"
   }
 }

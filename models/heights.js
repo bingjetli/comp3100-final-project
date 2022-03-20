@@ -4,6 +4,7 @@
 const COLLECTIONS = require("../common/collections");
 const dmm = require("../common/decimillimeter");
 const mongo = require("../common/mongo.js");
+const validator = require("validator");
 
 /**
  * creates a new entry object for the database with the following parameters
@@ -22,6 +23,13 @@ const mongo = require("../common/mongo.js");
 function createHeightObject(p_name, p_male, p_female, p_is_country){
     /** validate the optional `is_country` parameter since missing parameters in javascript default to undefined and `is_country` is a boolean */
     p_is_country = (p_is_country === undefined)? false : p_is_country;
+
+    /** error checking */
+    if(validator.isEmpty(p_name)) throw new Error("p_name cannot be an empty string");
+    if(typeof p_male !== "number") throw new Error("p_male must be number");
+    if(typeof p_female !== "number") throw new Error("p_female must be number");
+    if(p_male < 0) throw new Error("p_male cannot be a negative number");
+    if(p_female < 0) throw new Error("p_female cannot be a negative number");
 
     let output = {
         name : p_name,
@@ -43,7 +51,7 @@ async function createRecord(p_record){
         /** only create the record if the record doesn't exist already since updateRecord can be used to edit existing records and we want to avoid duplicate entries */
         let result_array = await collection.find({"name" : p_record.name}).toArray();
         if(result_array.length > 0){
-            throw "[heights.js]: error creating record: " + p_record.name + "; record already exists;";
+            throw "record exists already";
         }
         return await collection.insertOne(p_record);
     }
@@ -101,13 +109,13 @@ async function updateRecord(p_name, p_new_record){
         /** error checking to prevent duplicates being created from `.updateRecord()` */
         let search_results = await collection.find({name : p_new_record.name}).toArray();
         if(search_results.length > 0){
-            throw "[heights.js]: error updating record: " + p_name + " with " + p_new_record + "; a record already exists containing the name" + p_new_record.name;
+            throw "new_name is an existing record";
         }
 
         /** error checking to see if the record actually exists */
         search_results = await collection.find({name : p_name}).toArray();
         if(search_results.length < 1){
-            throw "[heights.js]: error updating record: " + p_name + " with " + p_new_record + "; the record with the name " + p_name + " does not exist";
+            throw "record does not exist";
         }
 
         /** use the old value if the new values are undefined */

@@ -6,7 +6,8 @@ Content-Type: application/json
 
 {
     "search_query" : {},
-    "sort_query" : {"male" : -1}
+    "sort_query" : {"male" : -1},
+    "limit" : 2
 }
 ### testing create_route
 POST http://localhost:7777/dataset/new HTTP/1.1

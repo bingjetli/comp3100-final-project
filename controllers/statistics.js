@@ -9,7 +9,7 @@ const height_stats_model = require("../models/height_stats");
 module.exports.generate_statistics_route = async (request, response) => {
     try {
         let result = await height_stats_model.generateStatistics();
-        response.send(result);
+        response.send("success");
         console.log(result);
     }
     catch(error){
@@ -22,7 +22,14 @@ module.exports.generate_statistics_route = async (request, response) => {
 module.exports.read_all_route = async (request, response) => {
     try {
         let result = await height_stats_model.readAllRecords();
-        response.send(result);
+        /** convert the results into csv format */
+        let result_csv = "";
+        if(result.length > 0){
+            for(i = 0; i < result.length; i++){
+                result_csv += result[i].stat + "," + result[i].value + "\n";
+            }
+        }
+        response.send(result_csv);
         console.log(result);
     }
     catch(error){
@@ -36,7 +43,12 @@ module.exports.read_route = async (request, response) => {
     try {
         let stat = request.params.stat;
         let result = await height_stats_model.readRecords(stat);
-        response.send(result);
+        /** convert the results into csv format */
+        let result_csv = "";
+        if(result.length > 0){
+            result_csv = result[0].stat + "," + result[0].value;
+        }
+        response.send(result_csv);
         console.log(result);
     }
     catch(error){
@@ -51,7 +63,7 @@ module.exports.get_percentile_route = async (request, response) => {
         let name = request.params.name;
         let sex = request.params.sex;
         let result = await height_stats_model.getPercentile(name, sex);
-        response.send(result);
+        response.send("" + result);
         console.log(result);
     }
     catch(error){

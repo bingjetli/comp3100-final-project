@@ -214,6 +214,12 @@ async function generateStatistics(){
     }
 }
 
+/**
+ * calculates the percentile of the record according to the name and sex amongst the dataset
+ * @param {String} p_name - name of the record to get the percentile of
+ * @param {String} p_sex - male or female
+ * @returns {Number} the calculated percentile value
+ */
 async function getPercentile(p_name, p_sex){
     /** generate sorting query to rank the `heights_all` array */
     let sort_query = {};
@@ -248,7 +254,7 @@ async function getPercentile(p_name, p_sex){
 
     /** calculate percentile from ordinal rank */
     let total_records = heights_all.length;
-    return {"percentile" : (n_below_index / total_records) * 100};
+    return (n_below_index / total_records) * 100;
 }
 
 module.exports = {getPercentile, createStatObject, createRecord, readAllRecords, readRecords, updateRecord, deleteRecord, generateStatistics};

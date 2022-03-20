@@ -13,11 +13,13 @@ let db;
 /**
  * wrapper to connect to the specified mongodb database
  * @param {String} database_name - name of the database to connect to
+ * @returns {Boolean} true if it successfully connected to the database
  */
 async function connectToDatabase(database_name){
     try {
         await mongo_client.connect();
         db = await mongo_client.db(database_name);
+        return true;
     }
     catch(error){
         throw error;
@@ -47,10 +49,12 @@ async function getCollection(collection_name){
 
 /**
  * wrapper to close the connection to the specified mongodb database
+ * @returns {Boolean} true if it successfully closes the database instance
  */
 async function closeDatabase(){
     try {
         await mongo_client.close();
+        return true;
     }
     catch(error){
         throw error;
