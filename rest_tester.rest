@@ -1,13 +1,39 @@
-get http://localhost:7777/
+### testing reset_route
+GET http://localhost:7777/dataset/reset HTTP/1.1
+### testing read_ex_route
+POST http://localhost:7777/dataset/get/ HTTP/1.1
+Content-Type: application/json
 
-###
-get http://localhost:7777/dataset/asdfasdf
+{
+    "search_query" : {},
+    "sort_query" : {"male" : -1}
+}
+### testing create_route
+POST http://localhost:7777/dataset/new HTTP/1.1
+Content-Type: application/json
 
-###
-put http://localhost:7777/dataset/create/aghanistan/18091/0
+{
+    "name":"testing",
+    "male_dmm":18019,
+    "female_dmm":16000
+}
+### testing read_route
+GET http://localhost:7777/dataset/get/testing HTTP/1.1
+### testing update_route
+PUT http://localhost:7777/dataset/update HTTP/1.1
+Content-Type: application/json
 
-###
-get http://localhost:7777/dataset/all
-
-###
-delete http://localhost:7777/dataset/delete/aghanistan
+{
+    "name" : "testing",
+    "new_female_dmm" : 9
+}
+### testing delete_route
+DELETE http://localhost:7777/dataset/delete/testing HTTP/1.1
+### testing generate_statistics_route
+PUT http://localhost:7777/statistics/generate HTTP/1.1
+### testing statistics read_route
+GET http://localhost:7777/statistics/read/n_male HTTP/1.1
+### testing read_all_route
+GET http://localhost:7777/statistics/all HTTP/1.1
+### testing statistics get_percentile_route
+GET http://localhost:7777/statistics/percentile/Canada/male HTTP/1.1
