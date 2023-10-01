@@ -1,9 +1,7 @@
-# comp3100 project server side implementation
+# COMP 3100 Final Project : Human Height Visualizer
+Using the dataset of average male & female heights by country from Kaggle, this project leverages Node.js, Express.js, MongoDB and jQuery to visualize the data from the dataset and allows visual comparison of each country's average heights.
 
-## running the server
-- pull/clone the repository
-- run your localhost mongodb server : default url is localhost:27017
-- run `node server.js` on the project directory
-- in vscode, install the extension `REST Client by Huachao Mao`
-- open the file `rest_tester.rest` in vscode
-- click on `send request` to test the API
+## To Run the Server
+1. Clone the repository.
+2. Run your mongoDB server. The default url is localhost:27017.
+3. Run `node server.js` from the project directory.
