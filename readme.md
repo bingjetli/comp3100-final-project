@@ -38,4 +38,10 @@ TODO : Include replication instructions with a recreated dataset since the origi
 
 ## VIDEO DEMO
 
+A video presentation was also created as part of the project requirements showcasing the project as well as describing the features implemented.
+
+&nbsp;
+
+Click on the video preview image below to view the video on YouTube.
+
 [![Video Preview](https://i.ytimg.com/vi/vfWSLQXsd30/maxresdefault.jpg)](https://youtu.be/vfWSLQXsd30)
